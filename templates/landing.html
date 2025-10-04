@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Welcome to Truth Finder</h2>
+    <p>Your go-to platform for uncovering the truth behind tweets. Simply enter a tweet URL below to get started.</p>
+    
+    <form method="POST" action="/extract">
+        <label for="tweet_url">Tweet URL:</label>
+        <br>
+        <input type="text" name="tweet_url" placeholder="https://x.com/user/status/12345..." required style="width: 95%; padding: 12px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
+        <br>
+        <input type="submit" style="padding: 12px 25px; background-color: #6638d3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;" value="Extract Tweet Info">
+    </form>
+{% endblock %}

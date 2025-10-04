@@ -1,0 +1,16 @@
+Analyze the X account [@username or user_id: USER_ID] for credibility and hate speech risk as a fact-checking agent. Fetch up to [NUM_POSTS: e.g., 50] recent posts from the last [TIME_RANGE: e.g., 6 months] using X tools. Use these factors, weighted equally unless specified:
+
+1. Transparency: % posts with evidence (links OR references to sources); check bio for methodology.
+2. Non-Partisanship: Topic diversity (e.g., balanced politics?); retweet balance from diverse accounts.
+3. Methodology: Verify 3-5 sample claims via web search (e.g., match to PolitiFact/Snopes).
+4. Account History: Patterns of consistency (no flip-flops); flag repeats of debunked topics.
+5. Engagement: Avg likes/replies; % toxic replies (semantic search for "fake" or "hate").
+6. Hate Risk: Scan for slurs, threats, bias (e.g., against groups); % flagged posts.
+
+Output:
+- Overall Credibility Score: [0-100], with Low/Med/High label.
+- Hate Risk: Low/Med/High, with % flagged.
+- Table: Factor | Score (0-10) | Evidence (2-3 examples).
+- Recommendations: e.g., "Trust for neutral topics; flag political claims."
+
+Handle media accounts leniently if verified/high-followers but low links—focus on history. Current date: [TODAY: e.g., 2025-10-03].

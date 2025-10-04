@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Tweet Analysis</h2>
+
+    {% if tweet %}
+        <div style="border: 1px solid #e1e8ed; border-radius: 12px; padding: 15px; margin-top: 20px;">
+            
+            <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <img src="{{ tweet['profile_image_url'] }}" alt="Profile Picture" style="width: 48px; height: 48px; border-radius: 50%;">
+                <div style="margin-left: 10px;">
+                    <strong style="font-size: 16px;">{{ tweet['name'] }}</strong>
+                    <div style="color: #5b7083;">@{{ tweet['username'] }}</div>
+                </div>
+            </div>
+
+            <p style="font-size: 18px; line-height: 1.5;">{{ tweet['text'] }}</p>
+
+            {% if tweet.media is defined %}
+                {% for media in tweet['media'] %}
+                    {% if media.type == 'photo' %}
+                        <img src="{{ media.url }}" alt="Tweet image" style="width: 100%; border-radius: 12px; margin-top: 10px;">
+                    {% elif media.type == 'video' %}
+                        <img src="{{ media.url }}" alt="Tweet video thumbnail" style="width: 100%; border-radius: 12px; margin-top: 10px;">
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            <div style="margin-top: 15px; color: #5b7083; display: flex; gap: 20px;">
+                <span>❤️ Likes: {{ tweet['likes'] }}</span>
+                <span>🔁 Retweets: {{ tweet['retweets'] }}</span>
+                <span>💬 Replies: {{ tweet['replies'] }}</span>
+            </div>
+            
+        </div>
+    {% else %}
+        <p style="color: red; margin-top: 20px;">Could not find the tweet or an error occurred. Please check the URL and try again.</p>
+    {% endif %}
+    <br>
+    {% if verdict %}
+        <h3>Verdict</h3>
+        <p>verdict: {{ verdict.final_verdict }}</p>
+        <p>Score: {{ verdict.overall_score }}</p>
+        <p>Explanation: {{ verdict.reason }}</p>
+    {% endif %}
+
+    <a href="/" style="display: inline-block; margin-top: 20px;">Check another tweet</a>
+{% endblock %}
