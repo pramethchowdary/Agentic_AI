@@ -238,6 +238,3 @@ if __name__ == "__main__":
 
     verdict = main_brain_agent(tweet, username_or_id=name)
     print("\nFinal Verdict:\n", verdict)
-
-    #this is a agents only
-    
