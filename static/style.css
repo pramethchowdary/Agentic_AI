@@ -1,0 +1,431 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(120deg, #3b82f6, #9333ea, #14b8a6);
+  background-size: 400% 400%;
+  animation: gradientFlow 10s ease infinite;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: background 0.5s, color 0.5s;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating Orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+  filter: blur(60px);
+  animation: float 10s ease-in-out infinite alternate;
+}
+
+.orb1 { width: 250px; height: 250px; top: 10%; left: 20%; background: #9333ea; }
+.orb2 { width: 300px; height: 300px; bottom: 10%; right: 15%; background: #14b8a6; }
+
+@keyframes float {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-50px); }
+}
+
+.content {
+  z-index: 2;
+  text-align: center;
+}
+
+/* Login Form */
+.login-container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem 3rem;
+  border-radius: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+}
+
+.login-container h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-container .tagline {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.6rem 0;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1rem;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #14b8a6;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-container button:hover {
+  background: #0d9488;
+  transform: scale(1.05);
+}
+
+.error {
+  color: #ff7070;
+  margin-bottom: 1rem;
+}
+
+/* Landing Page */
+.landing-container {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 3rem 4rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.landing-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.landing-container button {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background: #9333ea;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.landing-container button:hover {
+  background: #7e22ce;
+  transform: scale(1.05);
+}
+
+/* Dark Mode */
+.dark {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.dark .login-container,
+.dark .landing-container {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#themeToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+
+#themeToggle:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* --- Landing Page Styling --- */
+.landing-container {
+  max-width: 520px;
+  margin: 100px auto;
+  padding: 45px 40px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 22px;
+  text-align: center;
+  color: #fff;
+  backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+  animation: fadeIn 1.2s ease-in-out, floatUp 4s ease-in-out infinite alternate;
+  transform-style: preserve-3d;
+}
+
+/* subtle floating animation for life */
+@keyframes floatUp {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-10px); }
+}
+
+/* typography improvements */
+.landing-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.landing-container p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
+
+/* input and buttons */
+.tweet-form input {
+  width: 80%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.tweet-form input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.tweet-form input:focus {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+}
+
+/* primary button */
+.tweet-form button {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #9333ea, #3b82f6);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tweet-form button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(147, 51, 234, 0.6);
+}
+
+/* logout button */
+.logout-btn {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: #fff;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.05);
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.token-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.token-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.token-btn:hover {
+  background: linear-gradient(135deg, #9333ea, #3b82f6);
+  transform: scale(1.05);
+}
+
+.token-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#cooldownMessage {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #fbbf24;
+}
+
+/* ---------- Tweet Analysis Page ---------- */
+.analysis-container {
+  max-width: 700px;
+  margin: 60px auto;
+  background: rgba(10, 15, 25, 0.6);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  color: #e4e6eb;
+  text-align: center;
+  backdrop-filter: blur(20px);
+}
+
+.page-title {
+  font-size: 2rem;
+  background: linear-gradient(90deg, #7b2ff7, #f107a3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 30px;
+}
+
+/* Tweet card */
+.tweet-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+  text-align: left;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s ease;
+}
+.tweet-card:hover {
+  transform: translateY(-4px);
+}
+
+.tweet-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.profile-pic {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  margin-right: 12px;
+  border: 2px solid #7b2ff7;
+}
+
+.tweet-name {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.tweet-username {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.tweet-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.tweet-media img,
+.tweet-media video {
+  width: 100%;
+  border-radius: 14px;
+  margin-top: 10px;
+}
+
+.tweet-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  color: #b3b3b3;
+  font-size: 0.95rem;
+}
+
+/* Verdict */
+.verdict-card {
+  background: linear-gradient(135deg, #7b2ff7, #f107a3);
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 25px;
+  color: white;
+  text-align: left;
+  box-shadow: 0 0 20px rgba(241, 7, 163, 0.4);
+}
+.verdict-card h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+}
+
+/* Back button */
+.back-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 10px 18px;
+  background: linear-gradient(90deg, #7b2ff7, #f107a3);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.back-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Error message */
+.error-message {
+  color: #ff6b6b;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+footer {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+

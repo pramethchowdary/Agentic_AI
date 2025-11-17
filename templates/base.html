@@ -1,85 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Truth</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        header {
-            background: #6638d3;
-            color: #ffffff;
-            padding: 10px 0;
-            text-align: left;
-            margin-bottom: 100px;
-        }
-        header h1 {
-            margin-left: 20px;   /* just a small gap */
-        }
-        header p {
-            margin-left: 10px;
-            background: #6638d3;
-            color: #69e846;
-            padding: 10px 0;
-            text-align: left;
-        }
-        .container {
-        width: 80%;
-        max-width: 800px;        /* Limit max width for better readability */
-        margin: 40px auto;              /* Center horizontally with some top/bottom space */
-        padding: 20px;
-        background: white;              /* White card look */
-        border-radius: 5px;             /* Rounded corners */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Soft shadow */
-        color: black;                   /* Text color */
-        display: flex;                  
-        flex-direction: column;         /* Stack children vertically */
-        align-items: center;            /* Center horizontally inside */
-        justify-content: center;        /* Center vertically inside */
-        text-align: center;             /* Center text */
-}
-
-
-
-        h1 {
-            margin: 0;
-        }
-
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-
-        footer {
-            background: #35424a;
-            color: #ffffff;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Agentic AI{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <header>
-        <h1>Truth</h1>
-        <p>Not from T in U.S</p>
-    </header>
-    <div class="container">
-    {% block content %}
-    <p> this is not the content check the error!</p>
-    {% endblock %}
-    </div>
-    <footer>
-        <p>&copy; 2025 Truth. All rights reserved.</p>
-    </footer>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+
+  <button id="themeToggle">🌙 Dark Mode</button>
+  <footer>© 2025 Agentic AI | Designed by 20250177</footer>
+
+  {% block scripts %}
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  {% endblock %}
 </body>
 </html>

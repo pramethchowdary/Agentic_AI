@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Analyzing Tweet...{% endblock %}
+
+{% block content %}
+<div class="card card-loading">
+  <h1 class="page-title">Analyzing Tweet 🧠</h1>
+  <p>
+    Your request is being processed by our AI.
+  </p>
+  <p>Please wait... this may take up to a minute.</p>
+
+  <!-- The new loading bar -->
+  <div class="loading-bar-container">
+    <div class="loading-bar"></div>
+  </div>
+
+  <!-- Status message for feedback -->
+  <p id="polling-status" class="status-text"></p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- We override the base scripts block to add our polling logic -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // --- Dark Mode Toggle (Copied from base.html's script.js) ---
+    const themeToggle = document.getElementById("themeToggle");
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      if (document.body.classList.contains("dark-mode")) {
+        themeToggle.textContent = "☀️ Light Mode";
+      } else {
+        themeToggle.textContent = "🌙 Dark Mode";
+      }
+    });
+
+    // --- NEW: Polling Logic ---
+    const statusEl = document.getElementById("polling-status");
+    
+    // Flask passes these variables to the template
+    const jobId = "{{ job_id }}";
+    
+    let pollCount = 0;
+    const maxPolls = 30; // ~1.5 minutes (30 * 3s)
+
+    function pollStatus() {
+      pollCount++;
+      if (pollCount > maxPolls) {
+        statusEl.textContent = "Error: Request timed out. Please go back and try again.";
+        return;
+      }
+
+      statusEl.textContent = `Checking status... (Attempt ${pollCount})`;
+
+      // 1. Ping the status endpoint
+      fetch(`/status/${jobId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network error or server is down.');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // 2. Check the response
+          if (data.status === 'complete') {
+            // 3. SUCCESS: Redirect to the details page
+            statusEl.textContent = "Analysis complete! Loading results...";
+            window.location.href = data.redirect_url;
+
+          } else if (data.status === 'pending') {
+            // 4. PENDING: Wait 3 seconds and poll again
+            setTimeout(pollStatus, 3000);
+
+          } else {
+            // 5. FAILED: Show error
+            statusEl.textContent = `Error: ${data.message || 'An unknown error occurred.'}`;
+          }
+        })
+        .catch(error => {
+          statusEl.textContent = `Error: ${error.message}`;
+        });
+    }
+
+    // Start polling immediately on page load
+    pollStatus();
+  });
+</script>
+{% endblock %}

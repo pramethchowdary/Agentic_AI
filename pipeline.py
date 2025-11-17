@@ -168,11 +168,11 @@ def analyze_x_account(username_or_id, num_posts="50", time_range="6 months"):
 # -------------------------------
 # Agent 4: Main Brain Aggregator
 # -------------------------------
-def main_brain_agent(tweet_text, username_or_id="example_user"):
+def run_pipeline(tweet_text, username):
     # Run agents
     text_result = text_claim_agent(tweet_text)
     link_result = link_agent(tweet_text)
-    x_account_result = analyze_x_account(username_or_id)  # Use the provided username or ID
+    x_account_result = analyze_x_account(username)  # Use the provided username
 
     # Combine via Gemini
     model = genai.GenerativeModel("models/gemini-2.5-pro")
@@ -236,5 +236,5 @@ if __name__ == "__main__":
     
     name = "Isriramseshadri"
 
-    verdict = main_brain_agent(tweet, username_or_id=name)
+    verdict = run_pipeline(tweet, username=name)
     print("\nFinal Verdict:\n", verdict)

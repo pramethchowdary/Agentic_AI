@@ -1,47 +1,66 @@
 {% extends "base.html" %}
+
+{% block title %}Tweet Analysis | Agentic AI{% endblock %}
+
 {% block content %}
-    <h2>Tweet Analysis</h2>
+<div class="analysis-container">
+  <h1 class="page-title">Tweet Analysis Summary 🧠</h1>
 
-    {% if tweet %}
-        <div style="border: 1px solid #e1e8ed; border-radius: 12px; padding: 15px; margin-top: 20px;">
-            
-            <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                <img src="{{ tweet['profile_image_url'] }}" alt="Profile Picture" style="width: 48px; height: 48px; border-radius: 50%;">
-                <div style="margin-left: 10px;">
-                    <strong style="font-size: 16px;">{{ tweet['name'] }}</strong>
-                    <div style="color: #5b7083;">@{{ tweet['username'] }}</div>
-                </div>
-            </div>
+  {% if tweet %}
+  <div class="tweet-card">
+    <div class="tweet-header">
+      <img
+        src="{{ tweet['profile_image_url'] }}"
+        alt="Profile Picture"
+        class="profile-pic"
+      />
+      <div>
+        <h2 class="tweet-name">{{ tweet['name'] }}</h2>
+        <p class="tweet-username">@{{ tweet['username'] }}</p>
+      </div>
+    </div>
 
-            <p style="font-size: 18px; line-height: 1.5;">{{ tweet['text'] }}</p>
+    <p class="tweet-text">{{ tweet['text'] }}</p>
 
-            {% if tweet.media is defined %}
-                {% for media in tweet['media'] %}
-                    {% if media.type == 'photo' %}
-                        <img src="{{ media.url }}" alt="Tweet image" style="width: 100%; border-radius: 12px; margin-top: 10px;">
-                    {% elif media.type == 'video' %}
-                        <img src="{{ media.url }}" alt="Tweet video thumbnail" style="width: 100%; border-radius: 12px; margin-top: 10px;">
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-
-            <div style="margin-top: 15px; color: #5b7083; display: flex; gap: 20px;">
-                <span>❤️ Likes: {{ tweet['likes'] }}</span>
-                <span>🔁 Retweets: {{ tweet['retweets'] }}</span>
-                <span>💬 Replies: {{ tweet['replies'] }}</span>
-            </div>
-            
-        </div>
-    {% else %}
-        <p style="color: red; margin-top: 20px;">Could not find the tweet or an error occurred. Please check the URL and try again.</p>
-    {% endif %}
-    <br>
-    {% if verdict %}
-        <h3>Verdict</h3>
-        <p>verdict: {{ verdict.final_verdict }}</p>
-        <p>Score: {{ verdict.overall_score }}</p>
-        <p>Explanation: {{ verdict.reason }}</p>
+    {% if tweet.media is defined %}
+    <div class="tweet-media">
+      {% for media in tweet['media'] %}
+      {% if media.type == 'photo' %}
+      <img src="{{ media.url }}" alt="Tweet image" class="tweet-img" />
+      {% elif media.type == 'video' %}
+      <video controls class="tweet-video">
+        <source src="{{ media.url }}" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      {% endif %}
+      {% endfor %}
+    </div>
     {% endif %}
 
-    <a href="/" style="display: inline-block; margin-top: 20px;">Check another tweet</a>
+    <div class="tweet-stats">
+      <span>❤️ {{ tweet['likes'] }} Likes</span>
+      <span>🔁 {{ tweet['retweets'] }} Retweets</span>
+      <span>💬 {{ tweet['replies'] }} Replies</span>
+    </div>
+  </div>
+  {% else %}
+  <p class="error-message">
+    ❌ Could not find the tweet or an error occurred.<br />
+    Please check the URL and try again.
+  </p>
+  {% endif %}
+
+  {% if verdict %}
+  <div class="verdict-card">
+    <h2>🧩 Verdict Summary</h2>
+    <p><strong>Final Verdict:</strong> {{ verdict.final_verdict }}</p>
+    <p><strong>Score:</strong> {{ verdict.overall_score }}</p>
+    <p><strong>Explanation:</strong> {{ verdict.reason }}</p>
+  </div>
+  {% endif %}
+
+  <a href="{{ url_for('landing', user='admin') }}" class="back-btn"
+    >🔙 Analyze Another Tweet</a
+  >
+</div>
 {% endblock %}

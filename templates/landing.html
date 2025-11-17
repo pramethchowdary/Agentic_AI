@@ -1,13 +1,42 @@
 {% extends "base.html" %}
+{% block title %}Analyze Tweet | Agentic AI{% endblock %}
+
+
 {% block content %}
-    <h2>Welcome to Truth Finder</h2>
-    <p>Your go-to platform for uncovering the truth behind tweets. Simply enter a tweet URL below to get started.</p>
-    
-    <form method="POST" action="/extract">
-        <label for="tweet_url">Tweet URL:</label>
-        <br>
-        <input type="text" name="tweet_url" placeholder="https://x.com/user/status/12345..." required style="width: 95%; padding: 12px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
-        <br>
-        <input type="submit" style="padding: 12px 25px; background-color: #6638d3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;" value="Extract Tweet Info">
-    </form>
+<div class="landing-container">
+  <h1>Welcome, {{ user }} 👋</h1>
+  <p>Enter a tweet URL to analyze its authenticity and sentiment.</p>
+
+  <form action="{{ url_for('extract') }}" method="POST" class="tweet-form">
+    <input
+      type="text"
+      name="tweet_url"
+      placeholder="Enter Tweet URL (https://x.com/username/status/123...)"
+      required
+    />
+
+    <div class="token-buttons">
+      <p class="token-label">Select Token:</p>
+      {% for i in range(1,5) %}
+        <button 
+          type="button" 
+          class="token-btn" 
+          id="token{{ i }}" 
+          onclick="selectToken('{{ i }}')"
+        >Token {{ i }}</button>
+      {% endfor %}
+    </div>
+
+    <input type="hidden" name="selected_token" id="selectedToken" />
+    <br>
+    <button type="submit">Analyze Tweet</button>
+  </form>
+
+  <p id="cooldownMessage"></p>
+  <button onclick="window.location.href='/'" class="logout-btn">Log Out</button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='script_landing.js') }}"></script>
 {% endblock %}
