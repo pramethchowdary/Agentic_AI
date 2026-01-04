@@ -30,7 +30,7 @@ TOKENS = {
 }
 
 COOLDOWN_FILE = "token_cooldowns.json"
-COOLDOWN_TIME = 15 * 60 * 1000  # 5 minutes in ms
+COOLDOWN_TIME = 15 * 60 * 1000  # 15 minutes in ms
 
 
 # -------------------------
